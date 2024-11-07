@@ -253,3 +253,13 @@ a {
         margin-bottom: 25px;
     }
 }
+
+
+footer {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: 0.9em;
+    color: #888;
+    z-index: 10;
+}
