@@ -82,9 +82,9 @@ a {
 .ava {
     width: 200px;
     height: 200px;
-    border-radius: 50%;
+    #border-radius: 50%;
     background-size: cover;
-    background-image: url("assets/avatarka.jpg");
+    background-image: url("assets/avatarka.png");
 }
 .selectionBar {
     display: grid;
