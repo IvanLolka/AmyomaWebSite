@@ -114,6 +114,7 @@ a {
     grid-template-columns: repeat(3, min-content);
     gap: 30px;
 }
+
 .selection {
     position: relative;
     display: flex;
@@ -292,10 +293,13 @@ a {
         z-index: 10;
     }
     .ava {
-        margin-top: -60px;
+        margin-top: -80px;
+    }
+    .selectionBar5, .selectionBar4, .selectionBar3, .ava, .txtTitle, .txt {
+        position: relative;
+        top: -25px;
     }
 }
-
 
 footer {
     position: fixed;
