@@ -43,7 +43,7 @@ a {
     background: linear-gradient(45deg, #436883c6, #1b1c22c6);
     border-radius: 20px;
     padding: 100px;
-    width: 500px;
+    width: 517px;
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
 }
@@ -52,7 +52,7 @@ a {
     opacity: 0;
     z-index: -10;
 }
-.txtWhite1, .txtWhite2, .txtWhite3, .txtWhite4, .txtWhite5, .txtWhite6 {
+.txtWhite1, .txtWhite2, .txtWhite3, .txtWhite4, .txtWhite5, .txtWhite6, .txtWhite7, .txtWhite8  {
     color: white;
     font-size: 20px;
     font-family: 'roboto';
@@ -94,7 +94,7 @@ a {
 .selectionBar2 {
     margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(4, min-content);
+    grid-template-columns: repeat(5, min-content);
     gap: 30px;
 }
 .selectionBar3 {
@@ -111,7 +111,7 @@ a {
 .selectionBar5 {
     margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(2, min-content);
+    grid-template-columns: repeat(3, min-content);
     gap: 30px;
 }
 .selection {
@@ -152,6 +152,12 @@ a {
 .selection:hover .txtWhite6 {
     opacity: 1;
 }
+.selection:hover .txtWhite7 {
+    opacity: 1;
+}
+.selection:hover .txtWhite8 {
+    opacity: 1;
+}
 
 .txtWhite1{
     left: 89px;
@@ -160,15 +166,21 @@ a {
     left: 75px;
 } 
 .txtWhite3 {
-    left: 87px;
+    left: 85px;
 } 
 .txtWhite4 {
     left: 82px;
 } 
 .txtWhite5 {
-    left: 69px;
+    left: 80px;
 } 
 .txtWhite6 {
+    left: 75px;
+}
+.txtWhite7 {
+    left: 70px;
+}
+.txtWhite8 {
     left: 75px;
 }
 
