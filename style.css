@@ -84,7 +84,7 @@ a {
     height: 200px;
     border-radius: 50%;
     background-size: cover;
-    background-image: url("assets/avatarka.png");
+    background-image: url("assets/avatarka.webp");
 }
 .selectionBar {
     display: grid;
