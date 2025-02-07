@@ -79,6 +79,16 @@ a {
     -webkit-transition: 0.4s ease;
     transition: 0.4s ease;
 }
+.donatepay {
+    display: flex;
+    justify-content: center;
+    width: 60px;
+}
+.iconStyleD {
+    width: 60px;
+    -webkit-transition: 0.4s ease;
+    transition: 0.4s ease;
+}
 .ava {
     width: 200px;
     height: 200px;
@@ -298,6 +308,16 @@ a {
     .selectionBar5, .selectionBar4, .selectionBar3, .ava, .txtTitle, .txt {
         position: relative;
         top: -25px;
+    }
+    .iconStyleD {
+        width: 50px;
+        -webkit-transition: 0.4s ease;
+        transition: 0.4s ease;
+    }
+    .donatepay {
+        display: flex;
+        justify-content: center;
+        width: 50px;
     }
 }
 
