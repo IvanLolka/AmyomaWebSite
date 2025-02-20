@@ -25,6 +25,9 @@ body, html {
 a {
     text-decoration: none;
 }
+h1 {
+    all: unset;
+}
 
 .mainKonteiner {
     display: flex;
