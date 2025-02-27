@@ -46,7 +46,7 @@ h1 {
     background: linear-gradient(45deg, #436883c6, #1b1c22c6);
     border-radius: 20px;
     padding: 100px;
-    width: 517px;
+    width: 547px;
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
 }
@@ -101,7 +101,7 @@ h1 {
 }
 .selectionBar {
     display: grid;
-    grid-template-columns: repeat(4, min-content);
+    grid-template-columns: repeat(5, min-content);
     gap: 30px;
 }
 .selectionBar2 {
