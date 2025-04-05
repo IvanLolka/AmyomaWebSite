@@ -174,12 +174,8 @@
         const container = document.querySelector('.falling-dots');
         createDot()
         function createDot() {
-            const dot = document.createElement('img');
+            const dot = document.createElement('div');
             const minOpacity = 0.5;
-            dot.setAttribute("src","assets/AmyomaClown.png")
-            dot.style.width = "20px";
-            dot.style.height = "20px";
-            dot.classList.add('dot_anim');
             dot.classList.add('dot');
             dot.style.left = `${Math.random() * 100}vw`;
             dot.style.top = `-10px`;
@@ -195,7 +191,7 @@
                 }
             }, 1000); 
         }
-        setInterval(createDot, 2000);
+        setInterval(createDot, 3000);
     </script>
 </body>
 </html>

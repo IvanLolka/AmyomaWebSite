@@ -56,7 +56,7 @@ h1 {
     z-index: -10;
 }
 .txtWhite1, .txtWhite2, .txtWhite3, .txtWhite4, .txtWhite5, .txtWhite6, .txtWhite7, .txtWhite8  {
-
+    color: white;
     font-size: 20px;
     font-family: 'roboto';
     opacity: 0;
@@ -201,20 +201,7 @@ h1 {
 .selection:hover {
     justify-content: flex-start;
     width: 200px;
-    transform: rotate(1080deg) scaleX(1.17) scaleY(0.87);
-    animation: rainbow-effect 10s linear infinite;
-    
 }
-.selection:hover svg *:not([fill="white"]):not([fill="#fff"]):not([fill="#fafafa"]) {
-    fill: currentColor;
-    animation: rainbow-effect 10s linear infinite;
-}
-
-.selection svg *:not([fill="white"]):not([fill="#fff"]):not([fill="#fafafa"]) {
-    animation: hueRotate 10s infinite linear;
-}
-
-
 .selection:active {
     background-color: rgb(0, 0, 0, 20%);
 }
@@ -230,48 +217,20 @@ h1 {
     z-index: -1;
 }
 .dot {
-    will-change: filter, transform;
-    transform: translateZ(0);
     position: absolute;
     width: 5px;
     height: 5px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
     -webkit-animation: fall linear infinite;
     -moz-animation: fall linear infinite;
-    animation: fall linear infinite, rainbowDropShadow 0.1s infinite;
+    animation: fall linear infinite;
     will-change: transform;
-    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
-
+    filter: blur(0.6px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 
+                0 0 20px rgba(255, 255, 255, 0.3), 
+                0 0 30px rgba(255, 255, 255, 0.2);
 }
-
-
-@keyframes rainbowDropShadow {
-    0% {
-      filter: drop-shadow(0 0 6px red);
-    }
-    16.6% {
-      filter: drop-shadow(0 0 6px orange);
-    }
-    33.3% {
-      filter: drop-shadow(0 0 6px yellow);
-    }
-    50% {
-      filter: drop-shadow(0 0 6px green);
-    }
-    66.6% {
-      filter: drop-shadow(0 0 6px blue);
-    }
-    83.3% {
-      filter: drop-shadow(0 0 6px indigo);
-    }
-    100% {
-      filter: drop-shadow(0 0 6px violet);
-    }
-}
-
-@keyframes hueRotate {
-    0% { filter: hue-rotate(0deg); }
-    100% { filter: hue-rotate(360deg); }
-  }
 
 @keyframes fall {
     0% {
@@ -298,17 +257,6 @@ h1 {
     }
 }
 
-@keyframes rainbow-effect {
-    0%    { border-color: red;    color: red;}
-    16.66% { border-color: yellow; color: yellow; }
-    25%   { border-color: green;  color: green; }
-    41.66% { border-color: blue;   color: blue; }
-    50%   { border-color: purple; color: purple; }
-    58.33% { border-color: blue;   color: blue; }
-    75%   { border-color: green;  color: green; }
-    83.33% { border-color: yellow; color: yellow; }
-    100%  { border-color: red;    color: red; }
-}
 @media (600px > width) {
     .mainBar2 {
         height: 100vh;
