@@ -14,16 +14,16 @@
           "@context": "http://schema.org",
           "@type": "Person",
           "name": "Amyoma",
-          "url": "https://amyoma.ru",
-          "logo": "https://amyoma.ru/assets/icon.png",
+          "url": "https://amyoma.ru      ",
+          "logo": "https://amyoma.ru/assets/icon.png      ",
           "description": "Все важные ссылки для общения и взаимодействия с Амиомой в социальных сетях и на стримах.",
           "sameAs": [
-            "https://www.twitch.tv/amyoma",
-            "https://vk.com/amyoma",
-            "https://t.me/+fIT3p5VV9DNlZTMy",
-            "https://discord.gg/cS8Cvrxgu9",
-            "https://www.youtube.com/@amymattv",
-            "https://boosty.to/yali1ith"
+            "https://www.twitch.tv/amyoma      ",
+            "https://vk.com/amyoma      ",
+            "https://t.me/+fIT3p5VV9DNlZTMy      ",
+            "https://discord.gg/cS8Cvrxgu9      ",
+            "https://www.youtube.com/@amymattv      ",
+            "https://boosty.to/yali1ith      "
           ]
         }
     </script>
@@ -50,7 +50,9 @@
 <body>
     <main class="mainKonteiner">
         <div class="mainBar">
-            <div class="ava"></div>
+            <div class="ava-wrap">
+                <div class="ava"></div>
+            </div>
             <h1 class="txtTitle">Amyoma</h1>
             <p class="txt">Ссылочки</p>
             <div class="selectionBar">
@@ -108,7 +110,9 @@
             </div>
         </div>
         <div class="mainBar2">
-            <div class="ava"></div>
+            <div class="ava-wrap">
+                <div class="ava"></div>
+            </div>
             <p class="txtTitle">Amyoma</p>
             <p class="txt">Ссылочки</p>
             <div class="selectionBar3">
@@ -160,7 +164,10 @@
                 </button>
             </div>
         </div>
-        <div class="falling-dots"></div>
+        <div class="effects-layer">
+            <div class="rising-balloons"></div>
+            <div class="fireworks-layer"></div>
+        </div>
     </main>
     <footer>
         <p class="footer-text">Created by IvanLolka</p>
@@ -171,27 +178,156 @@
                 el.innerHTML = icons[key];
             });
         });
-        const container = document.querySelector('.falling-dots');
-        createDot()
-        function createDot() {
-            const dot = document.createElement('div');
-            const minOpacity = 0.5;
-            dot.classList.add('dot');
-            dot.style.left = `${Math.random() * 100}vw`;
-            dot.style.top = `-10px`;
-            dot.style.animationDuration = `${25 + Math.random() * 4}s`;
-            dot.style.opacity = Math.random() * (1 - minOpacity) + minOpacity;
-            container.appendChild(dot);
+        
+        let balloonSVGContent = null;
+        fetch('./assets/balloon.svg')
+            .then(r => r.text())
+            .then(text => {
+                balloonSVGContent = text;
+                setInterval(createBalloon, 2000);
+            });
 
-            const checkDotPosition = setInterval(() => {
-                const rect = dot.getBoundingClientRect();
-                if (rect.top > window.innerHeight) {
-                    dot.remove();
-                    clearInterval(checkDotPosition);
+        const balloonsContainer = document.querySelector('.rising-balloons'); 
+        const colors = ['#FF5252', '#FFD740', '#7C4DFF', '#18FFFF', '#69F0AE', '#FF4081', '#FFFF00', '#00E5FF', '#FF6E40', '#E040FB'];
+
+        function createBalloon() {
+
+            if (!balloonSVGContent) return;
+
+            const balloon = document.createElement('div');
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            balloon.classList.add('balloon');
+            balloon.innerHTML = balloonSVGContent;
+            balloon.style.color = randomColor;
+            balloon.style.left = `${Math.random() * 100}vw`;
+            balloon.style.bottom = `-40px`;
+            balloon.style.animationDuration = `${15 + Math.random() * 15}s`;
+            balloonsContainer.appendChild(balloon); 
+
+            const checkBalloonPosition = setInterval(() => {
+                const rect = balloon.getBoundingClientRect();
+                if (rect.bottom < 0) {
+                    balloon.remove();
+                    clearInterval(checkBalloonPosition);
                 }
-            }, 1000); 
+            }, 1000);
         }
-        setInterval(createDot, 3000);
+
+        const fxContainer = document.querySelector('.fireworks-layer');
+        const FW_SETTINGS = {
+            launchIntervalMin: 1000,
+            launchIntervalMax: 2300,
+            rocketRiseMin: 1700,
+            rocketRiseMax: 2500,
+            particleCountMin: 18,
+            particleCountMax: 50,
+            particleDistanceMin: 60,
+            particleDistanceMax: 160,
+        };
+
+        function scheduleNextLaunch() {
+            const t = FW_SETTINGS.launchIntervalMin + Math.random() * (FW_SETTINGS.launchIntervalMax - FW_SETTINGS.launchIntervalMin);
+            setTimeout(() => { launchFirework(); scheduleNextLaunch(); }, t);
+        }
+
+        scheduleNextLaunch();
+        function spawnTrailParticle(rocketEl) {
+            if (!rocketEl || !fxContainer) return;
+            const rect = rocketEl.getBoundingClientRect();
+            const startX = rect.left + rect.width / 2;
+            const startY = rect.top + rect.height * 0.85;
+
+            const p = document.createElement('div');
+            p.className = 'trail-particle';
+            p.style.left = `${startX}px`;
+            p.style.top = `${startY}px`;
+
+            const tx = (Math.random() - 0.5) * 18;
+            const ty = 20 + Math.random() * 40;
+            p.style.setProperty('--tx', `${tx}px`);
+            p.style.setProperty('--ty', `${ty}px`);
+
+            const dur = 320 + Math.random() * 300;
+            p.style.animationDuration = `${dur}ms`;
+
+            fxContainer.appendChild(p);
+            p.addEventListener('animationend', () => { if (p.parentNode) p.parentNode.removeChild(p); }, { once: true });
+        }
+
+
+        let fireworkRocketSVGContent = null;
+        fetch('./assets/fireworks.svg')
+            .then(r => r.text())
+            .then(text => {
+                fireworkRocketSVGContent = text;
+            })
+
+        function launchFirework() {
+            const rocket = document.createElement('div');
+            rocket.className = 'rocket';
+            const left = Math.random() * 100;
+            rocket.style.left = `${left}vw`;
+            const riseTime = FW_SETTINGS.rocketRiseMin + Math.random() * (FW_SETTINGS.rocketRiseMax - FW_SETTINGS.rocketRiseMin);
+            rocket.style.animationDuration = `${riseTime}ms`;
+            rocket.innerHTML = fireworkRocketSVGContent; 
+            fxContainer.appendChild(rocket);
+
+            const trailInterval = setInterval(() => {
+                spawnTrailParticle(rocket);
+            }, 10 * (riseTime * 0.001));
+            rocket._trailInterval = trailInterval;
+
+            const explodeTimeout = setTimeout(() => {
+                doExplosion(rocket);
+            }, riseTime * 0.5);
+
+            const onRocketEnd = () => {
+                if (fxContainer.contains(rocket)) {
+                    doExplosion(rocket);
+                }
+            };
+            rocket.addEventListener('animationend', onRocketEnd, { once: true });
+        }
+
+        function doExplosion(rocketEl) {
+            try { if (rocketEl && rocketEl._trailInterval) clearInterval(rocketEl._trailInterval); } catch(e){}
+            const rect = rocketEl.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+
+            if (rocketEl.parentNode) rocketEl.parentNode.removeChild(rocketEl);
+
+            const count = Math.floor(FW_SETTINGS.particleCountMin + Math.random() * (FW_SETTINGS.particleCountMax - FW_SETTINGS.particleCountMin));
+            const colors = ['#FF3D00', '#FF4081', '#7C4DFF', '#40C4FF', '#69F0AE', '#FFD740', '#FF6E40', '#FFE082'];
+
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                p.className = 'fw-particle';
+                const angle = Math.random() * Math.PI * 2;
+                const dist = FW_SETTINGS.particleDistanceMin + Math.random() * (FW_SETTINGS.particleDistanceMax - FW_SETTINGS.particleDistanceMin);
+                const tx = Math.cos(angle) * dist;
+                const ty = Math.sin(angle) * dist;
+                p.style.left = `${cx}px`;
+                p.style.top = `${cy}px`;
+                p.style.setProperty('--tx', `${tx}px`);
+                p.style.setProperty('--ty', `${ty}px`);
+                p.style.background = colors[Math.floor(Math.random() * colors.length)];
+                const dur = 600 + Math.random() * 900;
+                p.style.animationDuration = `${dur}ms`;
+                fxContainer.appendChild(p);
+                p.addEventListener('animationend', () => {
+                    if (p.parentNode) p.parentNode.removeChild(p);
+                }, { once: true });
+            }
+
+            const flash = document.createElement('div');
+            flash.className = 'fw-flash';
+            flash.style.left = `${cx}px`;
+            flash.style.top = `${cy}px`;
+            fxContainer.appendChild(flash);
+            flash.addEventListener('animationend', () => { if (flash.parentNode) flash.parentNode.removeChild(flash); }, { once: true });
+        }
     </script>
 </body>
 </html>

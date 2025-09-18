@@ -92,13 +92,46 @@ h1 {
     -webkit-transition: 0.4s ease;
     transition: 0.4s ease;
 }
+
+
+
 .ava {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background-size: cover;
-    background-image: url("assets/avatarka.webp");
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image: url("assets/avatarka.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 2;
 }
+.ava-wrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  overflow: visible;
+}
+.ava-wrap::before {
+  content: "";
+  position: absolute;
+  left: 83%;
+  top: -25%;
+  transform: translateX(-50%) rotate(-8.5deg);
+  width: 62%;
+  aspect-ratio: 1 / 1;
+  background-image: url("assets/party-hat.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,0.25));
+  z-index: 1;
+}
+
+
+
+
 .selectionBar {
     display: grid;
     grid-template-columns: repeat(5, min-content);
@@ -206,7 +239,7 @@ h1 {
     background-color: rgb(0, 0, 0, 20%);
 }
 
-.falling-dots {
+.rising-balloons {
     position: absolute;
     top: 0;
     left: 0;
@@ -216,44 +249,38 @@ h1 {
     overflow: hidden;
     z-index: -1;
 }
-.dot {
+.balloon {
     position: absolute;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    -webkit-animation: fall linear infinite;
-    -moz-animation: fall linear infinite;
-    animation: fall linear infinite;
+    width: 20px;
+    height: 30px;
+    -webkit-animation: rise linear infinite;
+    -moz-animation: rise linear infinite;
+    animation: rise linear infinite;
     will-change: transform;
-    filter: blur(0.6px);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 
-                0 0 20px rgba(255, 255, 255, 0.3), 
-                0 0 30px rgba(255, 255, 255, 0.2);
 }
 
-@keyframes fall {
+@keyframes rise {
     0% {
-        transform: translateY(-1vh);
+        transform: translateY(0vh);
     }
     100% {
-        transform: translateY(110vh);
+        transform: translateY(-110vh);
     }
 }
-@-webkit-keyframes fall {
+@-webkit-keyframes rise {
     0% {
-        -webkit-transform: translateY(-1vh);
+        -webkit-transform: translateY(0vh);
     }
     100% {
-        -webkit-transform: translateY(110vh);
+        -webkit-transform: translateY(-110vh);
     }
 }
-@-moz-keyframes fall {
+@-moz-keyframes rise {
     0% {
-        -moz-transform: translateY(-1vh);
+        -moz-transform: translateY(0vh);
     }
     100% {
-        -moz-transform: translateY(110vh);
+        -moz-transform: translateY(-110vh);
     }
 }
 
@@ -305,8 +332,16 @@ h1 {
         opacity: 1;
         z-index: 10;
     }
-    .ava {
+    .ava-wrap {
         margin-top: -80px;
+    }
+    .ava-wrap::before {
+        content: "";
+        position: absolute;
+        left: 83%;
+        top: -37%;
+        transform: translateX(-50%) rotate(-8.5deg);
+        width: 62%;
     }
     .selectionBar5, .selectionBar4, .selectionBar3, .ava, .txtTitle, .txt {
         position: relative;
@@ -331,4 +366,107 @@ footer {
     font-size: 0.9em;
     color: #888;
     z-index: 10;
+}
+
+.rocket {
+    position: absolute;
+    bottom: -8px;
+    width: 36px;
+    border-radius: 3px;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+    transform: translateY(0);
+    animation-name: rocket-rise;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    z-index: 10;
+}
+@keyframes rocket-rise {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-120vh); opacity: 0.95; }
+}
+.rocket::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  width: 3px;
+  height: 32px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.05));
+  filter: blur(3px);
+  opacity: 0.95;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+
+.trail-particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.95);
+  filter: blur(0.8px);
+  will-change: transform, opacity;
+  animation-name: trail-particle;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  z-index: 10;
+}
+@keyframes trail-particle {
+  0% { transform: translate(0,0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0.6); opacity: 0; }
+}
+
+.fw-white {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,1);
+  filter: blur(0.6px);
+  will-change: transform, opacity;
+  animation: fw-white 520ms cubic-bezier(.1,.7,.1,1) forwards;
+  z-index: 10;
+}
+@keyframes fw-white {
+  0% { transform: translate(0,0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0.3); opacity: 0; }
+}
+
+
+
+.fw-particle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    will-change: transform, opacity;
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+    animation-name: fw-particle;
+    animation-timing-function: cubic-bezier(.1,.7,.1,1);
+    animation-fill-mode: forwards;
+    z-index: 10;
+}
+@keyframes fw-particle {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    80% { opacity: 0.9; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(0.6); opacity: 0; }
+}
+
+.fw-flash {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0.6);
+    background: radial-gradient(circle, rgba(255, 242, 0, 0.95), rgba(255,200,150,0.2) 40%, rgba(255,200,150,0) 70%);
+    filter: blur(6px);
+    animation: fw-flash 420ms ease-out forwards;
+    z-index: 10;
+}
+@keyframes fw-flash {
+    0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(6); opacity: 0; }
 }
